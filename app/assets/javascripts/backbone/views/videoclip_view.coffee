@@ -27,12 +27,11 @@ class @.Clipmeme.Views.VideoClip extends Backbone.View
       null,
       null,
       {allowScriptAccess: "always"},
-      {id: @playerId} #, style: 'display: none;'}
+      {id: @playerId}
     
 
   ready: ->
     @player = $("##{@playerId}")[0]
-    console.log('ready de ', @playerId, @player)
     @player.cueVideoById(@videoId)
   
   play: ->
