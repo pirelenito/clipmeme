@@ -1,0 +1,25 @@
+%h1 Listing video_clips
+
+%table
+  %tr
+    %th Name
+    %th Video
+    %th Start seconds
+    %th End seconds
+    %th
+    %th
+    %th
+
+  - @video_clips.each do |video_clip|
+    %tr
+      %td= video_clip.name
+      %td= video_clip.youtube_video_id
+      %td= video_clip.start_seconds
+      %td= video_clip.end_seconds
+      %td= link_to 'Show', video_clip
+      %td= link_to 'Edit', edit_video_clip_path(video_clip)
+      %td= link_to 'Destroy', video_clip, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Video clip', new_video_clip_path

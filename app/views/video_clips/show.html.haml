@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @video_clip.name
+%p
+  %b Video:
+  = @video_clip.youtube_video_id
+%p
+  %b Start seconds:
+  = @video_clip.start_seconds
+%p
+  %b End seconds:
+  = @video_clip.end_seconds
+
+= link_to 'Edit', edit_video_clip_path(@video_clip)
+\|
+= link_to 'Back', video_clips_path
