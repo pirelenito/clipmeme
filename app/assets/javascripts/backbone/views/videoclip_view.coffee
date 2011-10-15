@@ -13,8 +13,11 @@ class @.Clipmeme.Views.VideoClip extends Backbone.View
   render: ->
     $(@el).css 'position', 'relative'
     $(@el).css 'display', 'inline-block'
-    $(@el).html "<div id='#{@playerContainerId}'></div>"
-    $(@el).append "<div style='position: absolute; top: 0; bottom:0; left:0; right:0;'></div>"
+    $(@el).css 'overflow', 'hidden'
+    $(@el).css 'width', '480px'
+    $(@el).css 'height', '295px'
+    $(@el).html "<img src='http://img.youtube.com/vi/#{@videoId}/hqdefault.jpg'></img>"
+    $(@el).append "<div id='#{@playerContainerId}'></div>"
     
     swfobject.embedSWF "http://www.youtube.com/apiplayer?enablejsapi=1&version=3&playerapiid=#{@playerId}",
       @playerContainerId,
@@ -24,7 +27,8 @@ class @.Clipmeme.Views.VideoClip extends Backbone.View
       null,
       null,
       {allowScriptAccess: "always"},
-      {id: @playerId}
+      {id: @playerId} #, style: 'display: none;'}
+    
 
   ready: ->
     @player = $("##{@playerId}")[0]
@@ -35,10 +39,12 @@ class @.Clipmeme.Views.VideoClip extends Backbone.View
     @player.seekTo @startSeconds
     @player.playVideo()
     setTimeout @updatePlayerInfo, 50
+    @$("img").hide()
   
   updatePlayerInfo: =>
     if @player.getCurrentTime() > @endSeconds
-      @player.stopVideo() 
+      @player.stopVideo()
+      @$("img").show()
     else
       setTimeout @updatePlayerInfo, 50
 
